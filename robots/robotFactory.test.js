@@ -1,13 +1,13 @@
 const randomRobotFactory = require("./randomRobotFactory")
 const smartRobotFactory = require("./smartRobotFactory")
 
-test.skip("random robot builds as expected", ()=>{
+test("random robot builds as expected", ()=>{
     let robot = randomRobotFactory()
     let properties = Object.keys(robot)
     expect(properties).toStrictEqual(['location', 'mailbag', 'steps', 'deliveriesMade', 'travel'])
 })
 
-test.skip("random robot travel goes to Park from Post Office", ()=>{
+test("random robot travel goes to Park from Post Office", ()=>{
     let robot = randomRobotFactory()
     let roadGraph= {
         "Post Office":["Park"],
@@ -18,13 +18,13 @@ test.skip("random robot travel goes to Park from Post Office", ()=>{
 
 
 
-test.skip("smart robot builds as expected", ()=>{
+test("smart robot builds as expected", ()=>{
     let robot = smartRobotFactory()
     let properties = Object.keys(robot)
     expect(properties).toStrictEqual(['location', 'mailbag', 'steps', 'deliveriesMade', 'travel'])
 })
 
-test.skip("smart robot travel goes to Park from Post Office", ()=>{
+test("smart robot travel goes to Park from Post Office", ()=>{
     let robot = randomRobotFactory()
     let roadGraph= {
         "Post Office":["Park"],

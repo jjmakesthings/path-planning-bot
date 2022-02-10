@@ -1,11 +1,8 @@
+const robotStartsAt = require("./robotFactoryUtils")
+
 const smartRobotFactory = function(){
     //when choosing where to travel, robot will choose from least visited locations
-    let location = 'Post Office'
-    let mailbag = []
-    let steps = 0
-    let deliveriesMade = 0
     let locationLog = {}
-
     const logLocation = function(place){
         if (locationLog[place]) {
             locationLog[place]++
@@ -32,7 +29,7 @@ const smartRobotFactory = function(){
         this.steps ++
         return this.location
     }
-    return {location, mailbag, steps, deliveriesMade, travel}
+    return Object.assign(robotStartsAt("Post Office"), {travel})
 };
 
 module.exports = smartRobotFactory

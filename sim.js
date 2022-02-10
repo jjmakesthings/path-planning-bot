@@ -41,7 +41,7 @@ const simulateMailJob = function(times, robotFactory, townFactory, mailCount){
     return average
 }
 
-//console.log(simulateMailJob(100, randomRobotFactory, randomTownFactory, 2))
+console.log(simulateMailJob(1000, smartRobotFactory, randomTownFactory, 6))
 
 
 module.exports = {stepsToCompleteMailJob, simulateMailJob}

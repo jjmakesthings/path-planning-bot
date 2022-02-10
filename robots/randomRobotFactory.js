@@ -1,9 +1,6 @@
-const randomRobotFactory = function(){
-    let location = 'Post Office'
-    let mailbag = []
-    let steps = 0
-    let deliveriesMade = 0
+const robotStartsAt = require("./robotFactoryUtils")
 
+const randomRobotFactory = function(){
     const getNextLocation = function(travelOptions){
         return travelOptions[Math.floor(Math.random()*travelOptions.length)]
     }
@@ -13,7 +10,7 @@ const randomRobotFactory = function(){
         this.steps ++
         return this.location
     }
-    return {location, mailbag, steps, deliveriesMade, travel}
+    return Object.assign(robotStartsAt("Post Office"), {travel})
 };
 
 module.exports = randomRobotFactory
