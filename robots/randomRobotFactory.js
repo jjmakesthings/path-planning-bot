@@ -3,17 +3,18 @@ const randomRobotFactory = function(){
     let mailbag = []
     let steps = 0
     let deliveriesMade = 0
-    let travel = function(roadGraph){
-        let travelOptions = roadGraph[this.location]
-        let travelTo = travelOptions[Math.floor(Math.random()*travelOptions.length)]
-        while(travelTo == this.location){
-        travelTo = travelOptions[Math.floor(Math.random()*travelOptions.length)]
-        }
-        this.location = travelTo
+
+    const getNextLocation = function(travelOptions){
+        return travelOptions[Math.floor(Math.random()*travelOptions.length)]
+    }
+    const travel = function(roadGraph){
+        const travelOptions = roadGraph[this.location]
+        this.location = getNextLocation(travelOptions)
         this.steps ++
-        return travelTo
+        return this.location
     }
     return {location, mailbag, steps, deliveriesMade, travel}
 };
 
 module.exports = randomRobotFactory
+

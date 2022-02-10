@@ -1,5 +1,4 @@
-const randomTownFactory = (function(roads){
-    let mail = []
+const randomTownFactory = (function(roads, mailCount){
     const roadGraph = (function(arr){
             const graph = arr.reduce((obj, road)=>{
             let [from, to] = road.split("-")
@@ -17,11 +16,10 @@ const randomTownFactory = (function(roads){
         },{})
         return graph
     }(roads))
-
-    let createMail = function(qty, graph=roadGraph){
+    const createMail = function(qty){
         let mail = []
-        let createRandomParcel = function(graph){
-            const roads = Object.keys(graph)
+        const roads = Object.keys(roadGraph)
+        let createRandomParcel = function(){
             const from = roads[Math.floor(Math.random()*roads.length)]
             let to = roads[Math.floor(Math.random()*roads.length)]
             while(from == to){
@@ -30,11 +28,13 @@ const randomTownFactory = (function(roads){
             return {from, to}
         }
         while(mail.length <qty){
-            mail.push(createRandomParcel(graph))
+            mail.push(createRandomParcel())
         }
-        this.mail = mail
+        return mail
     }
-    return {roadGraph, createMail, mail}
+    let mail = createMail(mailCount)
+
+    return {roadGraph, mail}
 })
 
 module.exports = randomTownFactory
