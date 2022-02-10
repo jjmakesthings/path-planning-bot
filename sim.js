@@ -1,22 +1,10 @@
-
 const randomTownFactory = require("./towns/randomTownFactory");
 const randomRobotFactory = require("./robots/randomRobotFactory");
 const smartRobotFactory = require("./robots/smartRobotFactory");
 
 
-const roads = [
-    "Alice's House-Bob's House",   "Alice's House-Cabin",
-    "Alice's House-Post Office",   "Bob's House-Town Hall",
-    "Daria's House-Ernie's House", "Daria's House-Town Hall",
-    "Ernie's House-Grete's House", "Grete's House-Farm",
-    "Grete's House-Shop",          "Marketplace-Farm",
-    "Marketplace-Post Office",     "Marketplace-Shop",
-    "Marketplace-Town Hall",       "Shop-Town Hall"
-];
-const mailCount = 6
-  
-const stepsToCompleteMailJob = function(robotFactory, townFactory){
-    let town = townFactory(roads, mailCount)
+const stepsToCompleteMailJob = function(robotFactory, townFactory, mailCount){
+    let town = townFactory(mailCount)
     let robot = robotFactory()
 
     const pickupMail = function(){
@@ -43,15 +31,17 @@ const stepsToCompleteMailJob = function(robotFactory, townFactory){
     return robot.steps
 }
 
-const simulateMailJob = function(times, robotFactory, townFactory){
+const simulateMailJob = function(times, robotFactory, townFactory, mailCount){
     let stepsList = []
     for(let i=0; i<times; i++){
-        let stepsTaken = stepsToCompleteMailJob(robotFactory, townFactory)
+        let stepsTaken = stepsToCompleteMailJob(robotFactory, townFactory, mailCount)
         stepsList.push(stepsTaken)
     }
     const average = stepsList.reduce((a,b)=>a+b)/stepsList.length
     return average
 }
 
-console.log(simulateMailJob(1000, smartRobotFactory, randomTownFactory))
+//console.log(simulateMailJob(100, randomRobotFactory, randomTownFactory, 2))
 
+
+module.exports = {stepsToCompleteMailJob, simulateMailJob}
